@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -eo pipefail
+
+action=$CNAB_ACTION
+name=$CNAB_INSTALLATION_NAME
+param=${CNAB_P_HELLO}
+
+echo "CNAB_ACTION is: $CNAB_ACTION"
+echo "CNAB_INSTALLATION_NAME is: $CNAB_INSTALLATION_NAME"
+echo "CNAB_P_HELLO is: $CNAB_P_HELLO"
+echo "ENV greeting is: $GREETING"
+
+
+echo "$param world"
+case $action in
+    build)
+    echo "Executing build steps..."
+    ;;
+    install)
+    echo "Install action"
+    ;;
+    uninstall)
+    echo "uninstall action"
+    ;;
+    upgrade)
+    echo "Upgrade action"
+    ;;
+    downgrade)
+    echo "Downgrade action"
+    ;;
+    status)
+    echo "Status action"
+    ;;
+    *)
+    echo "No action for $action"
+    ;;
+esac
+echo "Action $action complete for $name"

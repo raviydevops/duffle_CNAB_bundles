@@ -1,0 +1,51 @@
+{
+    "name": "helloworld",
+    "version": "0.1.2",
+    "description": "A short description of your bundle",
+    "keywords": [
+        "helloworld",
+        "cnab",
+        "tutorial"
+    ],
+    "maintainers": [
+        {
+            "name": "Ravi Teja Yaramati",
+            "email": "raviydevops@gmail.com",
+            "url": "https://example.com"
+        }
+    ],
+    "invocationImages": {
+        "cnab": {
+            "name": "cnab",
+            "builder": "docker",
+            "configuration": {
+                "registry": "raviydevops"
+            }
+        }
+    },
+    "parameters": {
+        "hello" : {
+            "type" : "string",
+            "defaultValue": "HelloValue",
+            "metadata": {
+               "description": "Trying parameter checks, will it be a param as CNAB_P_HELLO"
+            }
+        },
+        "greeting": {
+            "defaultValue": "helloGreet",
+            "type": "string",
+            "destination": {
+                "env": "GREETING"
+            },
+            "metadata":{
+                "description": "Trying env checks, will it be a env as $GREETING"
+            }
+        }
+    },
+    "credentials": null,
+    "actions": {
+        "build": {
+            "modifies": false
+        }
+    }
+}
