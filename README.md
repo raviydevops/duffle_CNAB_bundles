@@ -77,6 +77,6 @@ duffle install cdk-fargate-ecs-install cdk-fargate-ecs -c cdk-fargate-ecs-creds
 ### Uninstalling the application
 Use the following command to uninstall (or remove the Stack)
 ``` bash
-duffle install bundleInstallName bundleName -c CredentialSet
+duffle uninstall bundleInstallName bundleName -c CredentialSet
 duffle uninstall cdk-fargate-ecs-install cdk-fargate-ecs -c cdk-fargate-ecs-creds
 ```
