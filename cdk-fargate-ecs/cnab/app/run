@@ -1,0 +1,48 @@
+#!/bin/bash
+action=$CNAB_ACTION
+name=$CNAB_INSTALLATION_NAME
+
+case $action in
+    install)
+    echo -e "\nInstall action"
+    npm run build
+    echo -e "\nlisting CDK stacks..."
+    cdk ls -l
+    echo -e "\nSyntesizing CFN templates"
+    cdk synth fargate
+    echo -e "\nDifferentiating with deployed stack"
+    cdk diff fargate
+    echo -e "\ndeploying..."
+    cdk deploy fargate
+    ;;
+
+
+    uninstall)
+    echo -e "\ndestroying the stack"
+    cdk destroy fargate -f
+    ;;
+
+    upgrade)
+    echo "Upgrade action"
+    ;;
+
+    downgrade)
+    echo "Downgrade action"
+    ;;
+
+    status)
+    echo "Status action"
+    echo -e "\nlisting CDK stacks..."
+    cdk ls -l
+    echo -e "\nSyntesizing CFN templates"
+    cdk synth fargate
+    echo -e "\nDifferentiating with deployed stack"
+    cdk diff fargate
+    ;;
+
+    *)
+    echo "No action for $action"
+    ;;
+esac
+
+echo "Action $action complete for $name"

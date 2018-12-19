@@ -1,0 +1,17 @@
+{
+  "name": "fargate",
+  "version": "1.0.0",
+  "description": "fargate cdk",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-cdk/aws-ec2": "^0.20.0",
+    "@aws-cdk/aws-ecs": "^0.20.0"
+  }
+}

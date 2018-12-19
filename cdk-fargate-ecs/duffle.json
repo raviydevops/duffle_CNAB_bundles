@@ -1,0 +1,38 @@
+{
+    "name": "cdk-fargate-ecs",
+    "version": "0.1.0",
+    "description": "cdk-fargate-ecs",
+    "keywords": [
+        "cdk-cnab",
+        "cnab"
+    ],
+    "maintainers": [
+        {
+            "name": "Ravi Teja Yaramati",
+            "email": "raviydevops@gmail.com"
+        }
+    ],
+    "invocationImages": {
+        "cnab": {
+            "name": "cnab",
+            "builder": "docker",
+            "configuration": {
+                "registry": "raviydevops"
+            }
+        }
+    },
+    "credentials": {
+        "AWS_ACCESS_KEY_ID": {
+            "env": "AWS_ACCESS_KEY_ID"
+        },
+        "AWS_DEFAULT_REGION": {
+            "env": "AWS_DEFAULT_REGION"
+        },
+        "AWS_SECRET_ACCESS_KEY": {
+            "env": "AWS_SECRET_ACCESS_KEY"
+        },
+        "APIKEY": {
+            "env": "APIKEY"
+        }
+    }
+}
