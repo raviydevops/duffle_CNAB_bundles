@@ -1,0 +1,67 @@
+version: '3.7'
+services:
+
+  # to test the spring boot app
+  # spring_boot_test:
+  #   # image: crud-springboot-dynamodb:1.0.0
+  #   # ports:
+  #   #   - 8080:8080
+  #   build:
+  #     context: ../
+  #     dockerfile: crud-springboot-dynamodb/Dockerfile
+  #   ports: 
+  #     - 8081:8080
+  #   depends_on: 
+  #     - dynamodb
+  #   env_file: 
+  #     - ./static-env/spring_boot.env
+  #   entrypoint: 
+  #     - mvn
+  #     - package
+  #   volumes: 
+  #     - type: bind
+  #       source: ./target
+  #       target: /usr/src/mymaven/target
+  #     - type: bind
+  #       source: ~/.m2
+  #       target: /root/.m2
+
+  # to up the spring boot app
+  spring_boot_app:
+    # image: crud-springboot-dynamodb:1.0.0
+    # ports:
+    #   - 8080:8080
+    build:
+      context: ./
+      dockerfile: Dockerfile.spring_boot_app
+    image: raviydevops/spring_boot_app
+    ports: 
+      - 8080:8080
+    depends_on: 
+      - dynamodb
+    env_file: 
+      - ./static-env/spring_boot.env
+    # entrypoint: 
+    #   - java
+    #   - jar
+    #   - /usr/src/mymaven/target/crud-springboot-dynamodb-0.0.1.jar
+    # volumes: 
+    #   - type: bind
+    #     source: ./target
+    #     target: /usr/src/mymaven/target
+
+  
+  dynamodb:
+    build:
+      context: ./
+      dockerfile: Dockerfile.dynamodb
+    image: raviydevops/dynamodb
+    ports: 
+      - 8000:8000
+    env_file: 
+      - ./static-env/dynamodb.env
+    # volumes: 
+    #   - type: bind
+    #     source: ./data
+    #     target: /data
+

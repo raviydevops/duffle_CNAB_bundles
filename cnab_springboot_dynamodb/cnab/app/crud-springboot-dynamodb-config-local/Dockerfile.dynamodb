@@ -1,0 +1,10 @@
+# FROM openjdk:8-jdk
+FROM openjdk:8-jdk
+RUN apt-get update && \
+    apt-get install -y wget tar
+RUN wget https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz && \
+    tar xvzf dynamodb_local_latest.tar.gz 
+WORKDIR /
+# RUN ls -la
+ENTRYPOINT [ "java", "-jar", "-Djava.library.path=./DynamoDBLocal_lib", "-jar", "DynamoDBLocal.jar" ]
+

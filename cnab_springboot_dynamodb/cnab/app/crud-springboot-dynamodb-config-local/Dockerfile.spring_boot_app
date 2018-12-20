@@ -1,0 +1,8 @@
+# FROM openjdk:8-jdk
+FROM openjdk:8-jdk
+RUN apt-get update 
+COPY target /target
+WORKDIR /target
+# RUN ls -la
+ENTRYPOINT [ "java", "-jar", "crud-springboot-dynamodb-0.0.1.jar" ]
+

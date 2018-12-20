@@ -1,1 +1,3 @@
-cnab/app/fargate/node_modules/
+cdk-fargate-ecs/cnab/app/fargate/node_modules
+simple-nodejs-weather-app/node_modules
+cnab_springboot_dynamodb/cnab/app/crud-springboot-dynamodb/target

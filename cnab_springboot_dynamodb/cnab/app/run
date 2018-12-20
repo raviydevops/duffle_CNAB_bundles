@@ -1,0 +1,49 @@
+#!/bin/bash
+action=$CNAB_ACTION
+name=$CNAB_INSTALLATION_NAME
+
+cd /cnab/app/
+docker-compose --version
+
+cd crud-springboot-dynamodb-config-local
+
+case $action in
+    build)
+    echo "Executing build steps..."
+    ;;
+    install)
+    echo "Install action"
+    echo "executing docker-compose up"
+    docker-compose up --build --abort-on-container-exit
+    # copy target/crud-springboot-dynamodb-0.0.1.jar
+    # echo $(docker-compose ps -q spring_boot_test)
+    # docker cp $(docker-compose ps -q spring_boot_test):/usr/src/mymaven/target/ ./target/
+    ;;
+    uninstall)
+    echo "uninstall action"
+    echo "executing docker-compose down"
+    docker-compose down 
+    docker-compose -f docker-compose-app.yml down
+
+    ;;
+    upgrade)
+    echo "Upgrade action"
+    ;;
+    downgrade)
+    echo "Downgrade action"
+    ;;
+    status)
+    echo "Status action"
+    ;;
+
+    app_up)
+    echo "Bringing the application up"
+    docker-compose -f docker-compose-app.yml up --build -d
+
+    ;;
+
+    *)
+    echo "No action for $action"
+    ;;
+esac
+echo "Action $action complete for $name"

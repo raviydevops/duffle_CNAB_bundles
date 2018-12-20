@@ -1,0 +1,43 @@
+{
+    "name": "cnab_springboot_dynamodb",
+    "version": "0.1.0",
+    "description": "cnab_springboot_dynamodb bundle",
+    "keywords": [
+        "dcnab_springboot_dynamodb",
+        "cnab"
+    ],
+    "maintainers": [
+        {
+            "name": "Ravi Teja Yaramati",
+            "email": "raviydevops@gmail.com"
+        }
+    ],
+    "invocationImages": {
+        "cnab": {
+            "name": "cnab",
+            "builder": "docker",
+            "configuration": {
+                "registry": "raviydevops"
+            }
+        }
+    },
+    "images": [
+        {
+            "image": "raviydevops/spring_boot_test:latest",
+            "description": "spring boot testing image"
+        },
+        {
+            "image": "raviydevops/dynamodb:latest",
+            "description": "dynamodb"
+        },
+        {
+            "image": "raviydevops/spring_boot_app:latest",
+            "description": "spring boot app"
+        }
+    ],
+    "actions": {
+        "app_up": {
+            "modifies": true
+        }
+    }
+}

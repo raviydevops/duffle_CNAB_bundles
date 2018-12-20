@@ -60,7 +60,7 @@ duffle build .
 ### Creating the credential set
 Use the following command to generate the credential set
 ``` bash
-duffle credentials generate bundleName CredentialName -q
+duffle credentials generate CredentialName bundleName -q
 duffle credentials generate cdk-fargate-ecs-creds cdk-fargate-ecs -q
 ```
 
