@@ -10,6 +10,7 @@ duffle
 ```
 
 Create the docker images from the [source repo](https://github.com/raviydevops/crud-springboot-dynamodb)
+</br> Also include the names of the images in the images sectio of duffle.json.
 
 ## Building the duffle cnab bundle
 
