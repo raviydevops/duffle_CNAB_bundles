@@ -1,0 +1,54 @@
+{
+    "name": "crud_springboot_dynamodb",
+    "version": "1.0.0",
+    "description": "crud_springboot_dynamodb cnab bundle",
+    "keywords": [
+        "crud_springboot_dynamodb",
+        "cnab"
+    ],
+    "maintainers": [
+        {
+            "name": "Ravi Teja Yaramati",
+            "email": "raviydevops@gmail.com"
+        }
+    ],
+    "invocationImages": {
+        "cnab": {
+            "name": "cnab",
+            "builder": "docker",
+            "configuration": {
+                "registry": "raviydevops"
+            }
+        }
+    },
+    "images": [
+        {
+            "image": "crud-springboot:1.0.0",
+            "description": "spring boot app"
+        },
+        {
+            "image": "dynamodb:1.0.0",
+            "description": "dynamodb"
+        }
+    ],
+    "parameters": {
+        "DYNAMODB_ENDPOINT_URL": {
+            "defaultValue": "http://dynamodb:8000/",
+            "type": "string",
+            "destination": {
+                "env": "DYNAMODB_ENDPOINT_URL"
+            },
+            "metadata":{
+                "description": "URL of dynamodb"
+            }
+        }
+    },
+    "credentials": {
+        "AWS_ACCESS_KEY_ID": {
+            "env": "AWS_ACCESS_KEY_ID"
+        },
+        "AWS_SECRET_ACCESS_KEY": {
+            "env": "AWS_SECRET_ACCESS_KEY"
+        }
+    }
+}
