@@ -32,7 +32,7 @@ duffle credentials generate crud_springboot_dynamodb-creds crud_springboot_dynam
 The credentials set file will be generated in ~/.duffle/credentials/ directory.
 Modify the values of the credentials.
 For this app any values for AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY will work as it is a local setup.
-Also DYNAMODB_ENDPOINT_URL can be modified in the parameters section duffle.json file.
+Also DYNAMODB_ENDPOINT_URL can be modified in the parameters section of duffle.json file.
 
 ## Installing the bundle
 
@@ -44,7 +44,7 @@ duffle install crud_springboot_dynamodb-install crud_springboot_dynamodb -c crud
 ```
 
 The spring boot app will now be running using dynamodb as backend.
-</br>This app can be tested through the below mentioned sample requests.
+</br>This service can be tested with the below mentioned sample requests.
 
 ### Sample Requests
 
