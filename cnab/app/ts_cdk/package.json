@@ -1,0 +1,26 @@
+{
+  "name": "ts_cdk",
+  "version": "0.1.0",
+  "bin": {
+    "ts_cdk": "bin/ts_cdk.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/node": "^8.9.4",
+    "typescript": "^3.1.2",
+    "aws-cdk": "^0.22.0"
+  },
+  "dependencies": {
+    "aws-cdk": "^0.22.0",
+    "@aws-cdk/aws-ec2": "^0.22.0",
+    "@aws-cdk/aws-ecs": "^0.22.0",
+    "@aws-cdk/aws-dynamodb": "^0.22.0",
+    "@aws-cdk/aws-iam": "^0.22.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^0.22.0",
+    "@aws-cdk/aws-eks": "^0.22.0"
+  }
+}

@@ -5,19 +5,23 @@ name=$CNAB_INSTALLATION_NAME
 # echo "DYNAMODB_ENDPOINT_URL is: ${DYNAMODB_ENDPOINT_URL}"
 
 case $action in
-    build)
-    echo "Executing build steps..."
-    ;;
     install)
+
+    cd /cnan/app/ts_cdk
+
     echo "Install action"
-    echo "executing docker-compose up"
-    docker-compose up -d
+    echo "executing npm run build"
+    npm run build
+    
+    echo "Executng cdk deploy"
+    cdk bootstrap
+    cdk deploy
     ;;
 
     uninstall)
     echo "uninstall action"
-    echo "executing docker-compose down"
-    docker-compose down 
+    echo "executing cdk destroy"
+    cdk destroy
     ;;
 
     upgrade)

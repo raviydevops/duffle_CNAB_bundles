@@ -1,9 +1,9 @@
 {
-    "name": "crud_springboot_dynamodb",
+    "name": "crud_springboot_dynamodb_aws_cdk",
     "version": "1.0.0",
-    "description": "crud_springboot_dynamodb cnab bundle",
+    "description": "crud_springboot_dynamodb cnab bundle on aws using cdk",
     "keywords": [
-        "crud_springboot_dynamodb",
+        "crud_springboot_dynamodb_aws_cdk",
         "cnab"
     ],
     "maintainers": [
@@ -23,25 +23,11 @@
     },
     "images": [
         {
-            "image": "crud-springboot:1.0.0",
+            "image": "raviydevops/crud-springboot:2.0.0",
             "description": "spring boot app"
-        },
-        {
-            "image": "dynamodb:1.0.0",
-            "description": "dynamodb"
         }
     ],
     "parameters": {
-        "DYNAMODB_ENDPOINT_URL": {
-            "defaultValue": "http://dynamodb:8000/",
-            "type": "string",
-            "destination": {
-                "env": "DYNAMODB_ENDPOINT_URL"
-            },
-            "metadata":{
-                "description": "URL of dynamodb"
-            }
-        }
     },
     "credentials": {
         "AWS_ACCESS_KEY_ID": {
@@ -49,6 +35,9 @@
         },
         "AWS_SECRET_ACCESS_KEY": {
             "env": "AWS_SECRET_ACCESS_KEY"
+        },
+        "AWS_DEFAULT_REGION": {
+            "env": "AWS_DEFAULT_REGION"
         }
     }
 }
