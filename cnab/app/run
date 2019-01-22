@@ -11,6 +11,7 @@ case $action in
 
     echo "Install action"
     echo "executing npm run build"
+    npm install
     npm run build
 
     echo "Executng cdk deploy"
