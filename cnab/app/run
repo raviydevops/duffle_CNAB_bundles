@@ -7,10 +7,10 @@ name=$CNAB_INSTALLATION_NAME
 case $action in
     install)
 
-    cd /cnan/app/ts_cdk
+    cd /cnab/app/ts_cdk
 
     echo "Install action"
-    echo "executing npm run build"
+    echo "Executing npm run build"
     npm install
     npm run build
 
@@ -20,8 +20,10 @@ case $action in
     ;;
 
     uninstall)
-    echo "uninstall action"
-    echo "executing cdk destroy --force"
+    cd /cnab/app/ts_cdk
+
+    echo "Uninstall action"
+    echo "Executing cdk destroy "
     cdk destroy --force
     ;;
 
