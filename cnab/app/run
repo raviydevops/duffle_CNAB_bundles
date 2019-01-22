@@ -12,7 +12,7 @@ case $action in
     echo "Install action"
     echo "executing npm run build"
     npm run build
-    
+
     echo "Executng cdk deploy"
     cdk bootstrap
     cdk deploy
@@ -20,8 +20,8 @@ case $action in
 
     uninstall)
     echo "uninstall action"
-    echo "executing cdk destroy"
-    cdk destroy
+    echo "executing cdk destroy --force"
+    cdk destroy --force
     ;;
 
     upgrade)
