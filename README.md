@@ -12,6 +12,13 @@ duffle
 Create the docker images from the [source repo](https://github.com/raviydevops/crud-springboot-dynamodb)
 </br> Also include the names of the images in the images section of duffle.json.
 
+## Modify duffle.json
+
+Modify the duffle.json file to inclde the paramater localEnvironment as true for deploying the app on local.
+Also DYNAMODB_ENDPOINT_URL env has to be included for local deployment, and it is not needed for aws.
+Any random credential values of AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY works for local.
+Include the parameter awsEnvironment as true for deploying the app on AWS ECS.
+
 ## Building the duffle cnab bundle
 
 Use the following command to create the bundle:
@@ -26,7 +33,7 @@ Use the following command to generate the credentials sets file:
 
 ``` bash
 duffle credentials generate credentialSetName bundleName -q
-duffle credentials generate crud_springboot_dynamodb_aws_cdk-creds crud_springboot_dynamodb_aws_cdk -q
+duffle credentials generate crud_springboot_dynamodb_local_and_aws-creds crud_springboot_dynamodb_local_and_aws -q
 ```
 
 The credentials set file will be generated in ~/.duffle/credentials/ directory.
@@ -38,10 +45,10 @@ Use the following command to install the bundle:
 
 ``` bash
 duffle install bundleInstallName bundleName -c credentialSetName
-duffle install crud_springboot_dynamodb_aws_cdk-install crud_springboot_dynamodb_aws_cdk -c crud_springboot_dynamodb_aws_cdk-creds
+duffle install crud_springboot_dynamodb_local_and_aws-install crud_springboot_dynamodb_local_and_aws -c crud_springboot_dynamodb_local_and_aws-creds
 ```
 
-It will output the endpoint url of the load balancer.
+It will output the endpoint url of the load balancer for aws. On local http://localhost:8080 is the endpoint url.
 The spring boot app will now be running using dynamodb as backend.
 </br>This service can be tested with the below mentioned sample requests.
 
@@ -96,7 +103,7 @@ Use the following command to uninstall (or destroy the services) the app
 
 ``` bash
 duffle uninstall bundleInstallName bundleName -c credentialSetName
-duffle uninstall crud_springboot_dynamodb_aws_cdk-install crud_springboot_dynamodb_aws_cdk -c crud_springboot_dynamodb_aws_cdk-creds
+duffle uninstall crud_springboot_dynamodb_local_and_aws-install crud_springboot_dynamodb_local_and_aws -c crud_springboot_dynamodb_local_and_aws-creds
 ```
 
 This will destroy the infrastrucure.

@@ -5,26 +5,40 @@ name=$CNAB_INSTALLATION_NAME
 # echo "DYNAMODB_ENDPOINT_URL is: ${DYNAMODB_ENDPOINT_URL}"
 
 case $action in
+   
     install)
-
-    cd /cnab/app/ts_cdk
-
     echo "Install action"
-    echo "Executing npm run build"
-    npm install
-    npm run build
+    if [ "$localEnvironment" = true ]; then
+        cd /cnab/app/docker-compose
+        echo "executing docker-compose up"
+        docker-compose up -d
+    fi
 
-    echo "Executng cdk deploy"
-    cdk bootstrap
-    cdk deploy
+    if [ "$awsEnvironment" = true ]; then
+        cd /cnab/app/ts_cdk
+        echo "Executng cdk deploy"
+        # cdk diff
+        cdk bootstrap
+        cdk deploy
+    fi
+
+
     ;;
 
     uninstall)
-    cd /cnab/app/ts_cdk
+    echo "uninstall action"
+    if [ "$localEnvironment" = true ]; then
+        cd /cnab/app/docker-compose
+        echo "executing docker-compose down"
+        docker-compose down
+    fi
 
-    echo "Uninstall action"
-    echo "Executing cdk destroy "
-    cdk destroy --force
+    if [ "$awsEnvironment" = true ]; then
+        cd /cnab/app/ts_cdk
+        echo "Executing cdk destroy "
+        cdk destroy --force
+    fi
+
     ;;
 
     upgrade)

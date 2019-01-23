@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+
+  spring_boot_app:
+    image: raviydevops/crud-springboot:1.0.0
+    ports:
+      - 8080:8080
+    depends_on: 
+      - dynamodb
+    env_file: 
+      - ./static-env/spring_boot.env
+    # entrypoint: 
+    #   - java
+    #   - jar
+    #   - /usr/src/mymaven/target/crud-springboot-dynamodb-0.0.1.jar
+
+  
+  dynamodb:
+    image: raviydevops/dynamodb:1.0.0
+    ports: 
+      - 8000:8000
+    env_file: 
+      - ./static-env/dynamodb.env

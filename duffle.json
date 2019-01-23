@@ -1,9 +1,9 @@
 {
-    "name": "crud_springboot_dynamodb_aws_cdk",
+    "name": "crud_springboot_dynamodb_local_and_aws",
     "version": "1.0.0",
-    "description": "crud_springboot_dynamodb cnab bundle on aws using cdk",
+    "description": "crud_springboot_dynamodb cnab bundle for local and/or aws",
     "keywords": [
-        "crud_springboot_dynamodb_aws_cdk",
+        "crud_springboot_dynamodb",
         "cnab"
     ],
     "maintainers": [
@@ -23,11 +23,49 @@
     },
     "images": [
         {
+            "image": "raviydevops/crud-springboot:1.0.0",
+            "description": "spring boot app"
+        },
+        {
+            "image": "raviydevops/dynamodb:1.0.0",
+            "description": "dynamodb"
+        },
+        {
             "image": "raviydevops/crud-springboot:2.0.0",
             "description": "spring boot app"
         }
     ],
     "parameters": {
+        "DYNAMODB_ENDPOINT_URL": {
+            "defaultValue": "http://dynamodb:8000/",
+            "type": "string",
+            "destination": {
+                "env": "DYNAMODB_ENDPOINT_URL"
+            },
+            "metadata":{
+                "description": "URL of dynamodb for local deployment (docker-compose)"
+            }
+        },
+        "localEnvironment": {
+            "defaultValue": true,
+            "type": "boolean",
+            "destination": {
+                "env": "localEnvironment"
+            },
+            "metadata":{
+                "description": "if local deployment is needed (true or false)"
+            }
+        },
+        "awsEnvironment": {
+            "defaultValue": true,
+            "type": "boolean",
+            "destination": {
+                "env": "awsEnvironment"
+            },
+            "metadata":{
+                "description": "if aws deployment is needed (true or false)"
+            }
+        }
     },
     "credentials": {
         "AWS_ACCESS_KEY_ID": {
