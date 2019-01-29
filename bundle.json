@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "v1.0.0-WD",
+  "name": "crud-spring-boot-bundle",
+  "version": "1.0.0",
+  "description": "bundle for crud-spring-boot and dynamodb",
+  "invocationImages": [
+    {
+      "imageType": "docker",
+      "image": "raviydevops/crud_springboot_dynamodb_local_and_aws-cnab:137f5416302d540757b87fb365dcf23005d567e7"
+    }
+  ],
+  "images": [
+    {
+      "image": "alpine",
+      "description": "curd spring boot"
+    }
+  ],
+  "parameters": {},
+  "credentials": {}
+}
