@@ -1,0 +1,44 @@
+#!/bin/bash
+
+
+case ${1} in
+    install)
+
+    cd /cnab/app/ts_cdk
+
+    echo "Install action"
+    echo "Executing npm run build"
+    npm install
+    npm run build
+
+    echo "Executng cdk deploy"
+    cdk bootstrap
+    cdk deploy
+    ;;
+
+    uninstall)
+    cd /cnab/app/ts_cdk
+
+    echo "Uninstall action"
+    echo "Executing cdk destroy "
+    cdk destroy --force
+    ;;
+
+    upgrade)
+    echo "Upgrade action"
+    ;;
+
+    downgrade)
+    echo "Downgrade action"
+    ;;
+
+    status)
+    echo "Status action"
+    ;;
+
+    *)
+    echo "No action for $action"
+    ;;
+esac
+
+echo "Action ${1} completed"

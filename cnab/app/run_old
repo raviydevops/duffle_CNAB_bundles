@@ -1,0 +1,47 @@
+#!/bin/bash
+action=$CNAB_ACTION
+name=$CNAB_INSTALLATION_NAME
+
+# echo "DYNAMODB_ENDPOINT_URL is: ${DYNAMODB_ENDPOINT_URL}"
+
+case $action in
+    install)
+
+    cd /cnab/app/ts_cdk
+
+    echo "Install action"
+    echo "Executing npm run build"
+    npm install
+    npm run build
+
+    echo "Executng cdk deploy"
+    cdk bootstrap
+    cdk deploy
+    ;;
+
+    uninstall)
+    cd /cnab/app/ts_cdk
+
+    echo "Uninstall action"
+    echo "Executing cdk destroy "
+    cdk destroy --force
+    ;;
+
+    upgrade)
+    echo "Upgrade action"
+    ;;
+
+    downgrade)
+    echo "Downgrade action"
+    ;;
+
+    status)
+    echo "Status action"
+    ;;
+
+    *)
+    echo "No action for $action"
+    ;;
+esac
+
+echo "Action $action complete for $name"

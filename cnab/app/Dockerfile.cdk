@@ -1,0 +1,18 @@
+# FROM alpine:latest
+FROM node:10.15.0-alpine
+
+RUN apk update
+RUN apk add -u bash && \
+    npm install -g aws-cdk && \
+    npm install -g typescript
+
+RUN mkdir -p /cnab/app
+
+COPY Dockerfile /cnab/Dockerfile
+COPY app /cnab/app
+
+RUN chmod +x /cnab/app/run_cdk
+
+WORKDIR /cnab/app/ts_cdk
+
+ENTRYPOINT ["/cnab/app/run_cdk"]

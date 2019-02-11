@@ -1,30 +1,13 @@
 #!/bin/bash
-action=$CNAB_ACTION
-name=$CNAB_INSTALLATION_NAME
 
-# echo "DYNAMODB_ENDPOINT_URL is: ${DYNAMODB_ENDPOINT_URL}"
-
-case $action in
+case ${1} in
     install)
 
-    cd /cnab/app/ts_cdk
-
-    echo "Install action"
-    echo "Executing npm run build"
-    npm install
-    npm run build
-
-    echo "Executng cdk deploy"
-    cdk bootstrap
-    cdk deploy
+    docker run -d -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION raviydevops/cdk_crud:1.0.0 install
     ;;
 
     uninstall)
-    cd /cnab/app/ts_cdk
-
-    echo "Uninstall action"
-    echo "Executing cdk destroy "
-    cdk destroy --force
+    docker run -d -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION raviydevops/cdk_crud:1.0.0 uninstall
     ;;
 
     upgrade)
@@ -44,4 +27,4 @@ case $action in
     ;;
 esac
 
-echo "Action $action complete for $name"
+echo "Action ${1} completed"
