@@ -13,8 +13,8 @@ RUN mkdir -p /cnab/app
 COPY Dockerfile /cnab/Dockerfile
 COPY app /cnab/app
 
-RUN chmod +x /cnab/app/run
+RUN chmod +x /cnab/app/run_invocation
 
 WORKDIR /cnab/app/ts_cdk
 
-ENTRYPOINT ["/cnab/app/run"]
+ENTRYPOINT ["/cnab/app/run_invocation"]
