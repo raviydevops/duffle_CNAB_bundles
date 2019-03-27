@@ -1,0 +1,14 @@
+# FROM jenkins:latest
+FROM jenkins_base:1.0.0
+USER root
+RUN apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates curl wget gnupg2 software-properties-common && \
+    # RUN echo $(. /etc/os-release; echo "$ID")
+    curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io
+
+RUN usermod -a -G docker jenkins
+# USER jenkins
+USER root

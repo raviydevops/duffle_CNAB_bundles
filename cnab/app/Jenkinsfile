@@ -1,0 +1,75 @@
+pipeline {
+    agent any
+    
+    tools {
+            maven 'mavenTool'
+            jdk 'JDK8u'
+            // def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        }
+        // tool name: 'dockerInContainer', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        stages {
+            stage ('git-clone') {
+                steps {
+                    // sh 'echo ${JAVA_HOME}'
+                    // // sh 'mvn -version'
+                    // sh 'export JAVA_HOME="/var/jenkins_home/bin/jdk1.8.0_111"'
+                    // sh 'export MAVEN_HOME="/var/jenkins_home/bin/apache-maven-3.6.0"'
+                    // git branch: 'aws_cdk', url: 'https://github.com/raviydevops/crud-springboot-dynamodb-config'
+                    git branch: 'master', url: 'https://github.com/raviydevops/crud-springboot-dynamodb'
+                    script {
+                        def GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                        // def GIT_COMMIT_HASH = checkout(scm).GIT_COMMIT
+                        env.GIT_COMMIT_HASH = GIT_COMMIT_HASH
+                    }
+                }
+            }
+
+            // stage ('mavenCIbuild') {
+            //     steps {
+            //         sh 'mvn clean package -Dmaven.test.skip=true'
+            //     }
+            // }
+
+            stage ('docker-build and push to registry') {
+                steps {
+                    script {
+                        // environment {
+                        //     registry = "https://registry.hub.docker.com/raviydevopst"
+                        //     registryCredential = 'docker-hub-credential'
+                        // }
+                        def dockerImage = docker.build("raviydevops/crud-springboot:${env.GIT_COMMIT_HASH}")
+                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credential') {
+                            dockerImage.push()
+                            dockerImage.push('latest')
+                        }
+                    }
+                }
+            }
+
+            // stage ('docker-push image to registry') {
+            //     steps {
+            //         docer.withRegistry('')
+            //     }
+            // }
+            // stage ('run-invocation-image') {
+            //     steps{
+            //         // def invocationImage = docker.image('raviydevops/invocation_image_crud:2.0.0').run("-e AWS_ACCESS_KEY_ID=key -e AWS_SECRET_ACCESS_KEY=secret -e AWS_DEFAULT_REGION=us-east-2 -v /var/run/docker.sock:/var/run/docker.sock")
+            //         // invocationImage.inside() {
+            //         //     sh 'install'
+            //         // }
+
+            //         // withDockerContainer(args: '-e AWS_ACCESS_KEY_ID=key -e AWS_SECRET_ACCESS_KEY=secret -e AWS_DEFAULT_REGION=us-east-2 -v /var/run/docker.sock:/var/run/docker.sock', image: 'raviydevops/invocation_image_crud:2.0.0') {
+            //         //     sh 'install'
+            //         // }
+            //         // docker { image 'maven:3-alpine' }
+            //         // sh 'sudo service docker start'
+            //         // sh 'docker ps -a'
+            //         sh 'docker run -d -e AWS_ACCESS_KEY_ID=key -e AWS_SECRET_ACCESS_KEY=secret -e AWS_DEFAULT_REGION=us-east-2 -v /var/run/docker.sock:/var/run/docker.sock  raviydevops/invocation_image_crud:1.0.0 install'
+            //     }
+            // }
+        }
+
+        // docker {
+            
+        // }
+}
